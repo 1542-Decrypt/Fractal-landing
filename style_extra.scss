@@ -1,0 +1,51 @@
+@import "node_modules/bootstrap/scss/bootstrap";
+.yellow {
+  background-color: $orange;
+}
+.orange{
+  color: $orange;
+}
+.transparent {
+  background-color: rgba($black, 0);
+}
+.bg-img{
+  background-image: url("images/Section1.png");
+  background-size: 100% 100%;
+}
+.bg2-img{
+  background-image: url("images/Section2.png");
+  background-size: 100% auto;
+}
+.bg3-img{
+  background-image: url("images/Section3.png");
+  background-size: 100% auto;
+}
+.bg4-img{
+  background-image: url("images/Section5.png");
+  background-size: 100% auto;
+}
+.headline{
+  padding-top: 3rem;
+  padding-bottom: 14rem;
+}
+.section-base{
+    max-width: 75%;
+}
+.bottomline{
+  max-width: 65%;
+}
+.logo{
+  padding-top: 8rem;
+}
+.accordion-but{
+  background-color: $orange;
+  $accordion-button-focus-border-color: rgba($black, 0);
+  $accordion-button-active-bg: $orange;
+  $accordion-border-width: 0;
+}
+.a_b{
+  padding-bottom: 15rem;
+}
+.semitransparent-bg{
+  background-color: rgba($black, 0.5);
+}
