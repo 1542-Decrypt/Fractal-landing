@@ -15,10 +15,16 @@
               <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse justify-content-center py-4 gap-5" id="navbarsExample03">
-                <button type="button" class="btn btn-lg yellow fw-semibold col-2">About</button>
-                <button type="button" class="btn btn-lg yellow fw-semibold col-2">Newsletter</button>
-                <button type="button" class="btn btn-lg yellow fw-semibold col-2">FAQ</button>
-                <button type="button" class="btn btn-lg yellow fw-semibold col-2">Team</button></span>
+              <div class="dropdown yellow col-2">
+                <button type="button" class="btn btn-lg fw-semibold dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">About</button>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="#">Plot</a></li>
+                  <li><a class="dropdown-item" href="#">Team</a></li>
+                  <li><a class="dropdown-item" href="#">Behind the scenes</a></li>
+                </ul>
+              </div>
+              <button type="button" class="btn btn-lg yellow fw-semibold col-2">Newsletter</button>
+              <button type="button" class="btn btn-lg yellow fw-semibold col-2">FAQ</button>
             </div>
           </div>
         </nav>
@@ -147,10 +153,10 @@
                 </div>
               </div>
               <div class="tab-pane fade text-light rounded-bottom-4 semitransparent-bg border border-white-subtle" id="signin-tab-pane" role="tabpanel" aria-labelledby="signin-tab" tabindex="0">
-                <form class="p-4">
+                <form class="p-4" name="memberform" onsubmit="confirmSubmission(); return false;" novalidate method="post" id="MF">
                   <h5 class="fw-light text-light text-">Sign Up to the Newsletter to recieve an email, once a new newsletter will be released. With that you will for sure not miss out on anything.</h5>
                   <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label">Email address</label>
+                    <label for="exampleInputEmail1" class="form-label" name="mail">Email address</label>
                     <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="name@example.com (required)" required>
                     <div id="emailHelp" class="form-text orange">We'll never share your email with anyone else.</div>
                   </div>
@@ -158,7 +164,8 @@
                     <input type="checkbox" class="form-check-input" id="checkmark" required>
                     <label class="form-check-label" for="checkmark">I agree with recieving notifications at any time.</label>
                   </div>
-                  <button type="submit" class="btn yellow text-dark fw-bold" data-bs-toggle="modal" data-bs-target="#success">Sign Up</button>
+                  <button type="submit" class="btn yellow text-dark fw-bold">Sign Up</button>
+                  <div id="liveAlertPlaceholder" class="pt-4"></div>
                 </form>
               </div>
             </div>
@@ -173,7 +180,6 @@
           </div>
           <div class="modal-body">
             You have successfully linked your email. You can ensure by checking the email we sent on your mail.
-            Also this is supposed to come out only when form is validated but this requires js and I didnt have time to code it.
           </div>
           <div class="modal-footer">
             <button type="button" class="btn yellow" data-bs-dismiss="modal">Close</button>
@@ -181,6 +187,40 @@
         </div>
       </div>
     </div>
+    <script>
+      //alert
+      const alertPlaceholder = document.getElementById('liveAlertPlaceholder')
+      const wrapper = document.createElement('div')
+      const appendAlert = (message, type) => {
+        wrapper.innerHTML = [
+            `<div class="alert alert-${type} alert-dismissible" role="alert">`,
+            `   <div>${message}</div>`,
+            '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>',
+            '</div>'
+        ].join('')
+        alertPlaceholder.append(wrapper)
+      }
+      //assigning modal
+      var Success = new bootstrap.Modal(document.getElementById('success'))
+      //form check
+      var mform = document.getElementById("MF");
+      function handleForm(event) { event.preventDefault(); } 
+      mform.addEventListener('submit', handleForm);
+      function valid(email) {
+          const pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+          return pattern.test(email);
+      }
+      function confirmSubmission() {
+        let input = document.querySelector('[type="email"]');
+        let check = document.querySelector('[type="checkbox"]')
+        if (valid(input.value)== true && check.checked == true){
+          Success.toggle();
+        }
+        else{
+          appendAlert('You did not fill all the fields!', 'warning')
+        }
+      }
+    </script>
     <footer class="bg-black">
         <div class="pb-5 pt-1">
             <div class="rounded mx-auto d-flex bottomline justify-content-center">
@@ -194,7 +234,7 @@
             <div class="rounded mx-auto d-flex bottomline">
               <img src="images/ts.png" class="rounded mx-auto d-block">
             </div>
-            <h4 class="fw-semibold text-light text-center pt-2">© Team Sawblade 2025 - <br><a href="#" class="orange">Contact Us</a></h4>
+            <h5 class="fw-semibold text-light text-center pt-2 ">© Team Sawblade 2025 - <br><a href="#" class="orange">Contact Us</a></h4>
         </div>
     </footer>
   </body>
