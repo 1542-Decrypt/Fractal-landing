@@ -8,6 +8,7 @@
   </head>
   <body>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+    <script src="https://cdn.emailjs.com/sdk/2.3.2/email.min.js"></script>
     <header class="bg-black sticky-top">
         <nav class="navbar navbar-expand-lg navbar-dark" aria-label="Third navbar example">
           <div class="container-fluid">
@@ -15,12 +16,17 @@
               <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse justify-content-center py-4 gap-5" id="navbarsExample03">
-              <div class="dropdown yellow col-2">
-                <button type="button" class="btn btn-lg fw-semibold dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">About</button>
-                <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="#">Plot</a></li>
-                  <li><a class="dropdown-item" href="#">Team</a></li>
-                  <li><a class="dropdown-item" href="#">Behind the scenes</a></li>
+              <div class="btn-group">
+                <button class="btn btn-lg yellow fw-semibold" type="button" aria-expanded="false">
+                  About
+                </button>
+                <button type="button" class="btn btn-sm dropdown-toggle dropdown-toggle-split yellow sp-3" data-bs-toggle="dropdown" aria-expanded="false">
+                  <span class="visually-hidden">Toggle Dropdown</span>
+                </button>
+                <ul class="dropdown-menu ">
+                  <li><a class="dropdown-item" href="#">Action</a></li>
+                  <li><a class="dropdown-item" href="#">Another action</a></li>
+                  <li><a class="dropdown-item" href="#">Something else here</a></li>
                 </ul>
               </div>
               <button type="button" class="btn btn-lg yellow fw-semibold col-2">Newsletter</button>
@@ -153,18 +159,18 @@
                 </div>
               </div>
               <div class="tab-pane fade text-light rounded-bottom-4 semitransparent-bg border border-white-subtle" id="signin-tab-pane" role="tabpanel" aria-labelledby="signin-tab" tabindex="0">
-                <form class="p-4" name="memberform" onsubmit="confirmSubmission(); return false;" novalidate method="post" id="MF">
+                <form class="p-4" name="memberform" onsubmit="confirmSubmission(); return false;" novalidate method="post" id="MF" action="http://formspree.io/you@email.com">
                   <h5 class="fw-light text-light text-">Sign Up to the Newsletter to recieve an email, once a new newsletter will be released. With that you will for sure not miss out on anything.</h5>
                   <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label" name="mail">Email address</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="name@example.com (required)" required>
+                    <input type="email" name="_replyto" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="name@example.com (required)" required>
                     <div id="emailHelp" class="form-text orange">We'll never share your email with anyone else.</div>
                   </div>
                   <div class="mb-3 form-check">
                     <input type="checkbox" class="form-check-input" id="checkmark" required>
                     <label class="form-check-label" for="checkmark">I agree with recieving notifications at any time.</label>
                   </div>
-                  <button type="submit" class="btn yellow text-dark fw-bold">Sign Up</button>
+                  <button type="submit" class="btn yellow text-dark fw-bold" value="Send">Sign Up</button>
                   <div id="liveAlertPlaceholder" class="pt-4"></div>
                 </form>
               </div>
@@ -179,7 +185,7 @@
             <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-            You have successfully linked your email. You can ensure by checking the email we sent on your mail.
+            We have sent a confirmation letter on your email. If you don't see the letter, check spam folder.
           </div>
           <div class="modal-footer">
             <button type="button" class="btn yellow" data-bs-dismiss="modal">Close</button>
@@ -189,6 +195,7 @@
     </div>
     <script>
       //alert
+      emailjs.init("IMMCpttkdwLn3F5iW");
       const alertPlaceholder = document.getElementById('liveAlertPlaceholder')
       const wrapper = document.createElement('div')
       const appendAlert = (message, type) => {
@@ -215,6 +222,7 @@
         let check = document.querySelector('[type="checkbox"]')
         if (valid(input.value)== true && check.checked == true){
           Success.toggle();
+          emailjs.send("service_j3vc0ol","template_88nx3oo", this);
         }
         else{
           appendAlert('You did not fill all the fields!', 'warning')
