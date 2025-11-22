@@ -228,7 +228,7 @@
         let input = document.querySelector('[type="email"]');
         let check = document.querySelector('[type="checkbox"]')
         if (valid(input.value)== true && check.checked == true){
-          emailjs.send("service_j3vc0ol","template_88nx3oo", test).then(
+          emailjs.send("service_j3vc0ol","template_88nx3oo", templateParams).then(
             (response) => {
               console.log('SUCCESS!', response.status, response.text);
             },
