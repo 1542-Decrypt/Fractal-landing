@@ -159,11 +159,11 @@
                 </div>
               </div>
               <div class="tab-pane fade text-light rounded-bottom-4 semitransparent-bg border border-white-subtle" id="signin-tab-pane" role="tabpanel" aria-labelledby="signin-tab" tabindex="0">
-                <form class="p-4" name="memberform" onsubmit="confirmSubmission(); return false;" novalidate method="post" id="MF" action="http://formspree.io/you@email.com">
+                <form class="p-4" name="memberform" onsubmit="confirmSubmission(); return false;" novalidate method="post" id="MF">
                   <h5 class="fw-light text-light text-">Sign Up to the Newsletter to recieve an email, once a new newsletter will be released. With that you will for sure not miss out on anything.</h5>
                   <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label" name="mail">Email address</label>
-                    <input type="email" name="_replyto" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="name@example.com (required)" required>
+                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="name@example.com (required)" required>
                     <div id="emailHelp" class="form-text orange">We'll never share your email with anyone else.</div>
                   </div>
                   <div class="mb-3 form-check">
@@ -221,8 +221,8 @@
         let input = document.querySelector('[type="email"]');
         let check = document.querySelector('[type="checkbox"]')
         if (valid(input.value)== true && check.checked == true){
-          Success.toggle();
           emailjs.send("service_j3vc0ol","template_88nx3oo", this);
+          Success.toggle();
         }
         else{
           appendAlert('You did not fill all the fields!', 'warning')
