@@ -200,9 +200,6 @@
           publicKey: "IMMCpttkdwLn3F5iW",
         });
       })();
-      var templateParams = {
-        test: 'email doesnt really have any params but they are needed I guess'
-      };
       const alertPlaceholder = document.getElementById('liveAlertPlaceholder')
       const wrapper = document.createElement('div')
       const appendAlert = (message, type) => {
@@ -228,6 +225,9 @@
         let input = document.querySelector('[type="email"]');
         let check = document.querySelector('[type="checkbox"]')
         if (valid(input.value)== true && check.checked == true){
+          const templateParams = {
+            to_email: document.getElementById('exampleInputEmail1').value,
+          };
           emailjs.send("service_j3vc0ol","template_88nx3oo", templateParams).then(
             (response) => {
               console.log('SUCCESS!', response.status, response.text);
